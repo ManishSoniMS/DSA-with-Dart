@@ -76,8 +76,6 @@ int _solve(List<int> A) {
       totalSum += subSum;
     }
   }
-
-  return totalSum;
   */
 
   /// Sub-optimal (Remove inner loop)
@@ -89,8 +87,6 @@ int _solve(List<int> A) {
       totalSum += subSum;
     }
   }
-
-  return totalSum;
   */
 
   /// Optimal (Contribution Technique)

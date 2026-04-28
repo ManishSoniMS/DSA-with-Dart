@@ -16,5 +16,12 @@ void main() {
   // rangeSum();
   // matrixMultiplication();
   // closestMinMax();
-  SumOfAllSubArray();
+  // SumOfAllSubArray();
+  // MaximumSubArray();
+  // SubArrayWithGivenSumAndLength();
+  // MaximumSubArraySumOfFixedLength();
+  // MinimumSwaps();
+  // SubArrayWithLeastAverage();
+  // CountingSubarraysEasy();
+  GoodSubArraysEasy();
 }

@@ -1,3 +1,4 @@
+export '1D/Easy/minimum_swaps.dart';
 export '1D/best_time_to_buy_and_sell_stocks.dart';
 export '1D/check_pair.dart';
 export '1D/closest_min_max.dart';
@@ -11,6 +12,12 @@ export '1D/rotate_array.dart';
 export '1D/second_largest_element.dart';
 export '1D/special_index.dart';
 export '1D/sub_array.dart';
+export '2D/Easy/maximum_sub_array.dart';
+export '2D/Easy/sub_array_with_given_sum_and_lenght.dart';
+export '2D/Easy/sum_of_all_sub_array.dart';
+export '2D/Medium/counting_subarrays_easy.dart';
+export '2D/Medium/good_subarrays_easy.dart';
+export '2D/Medium/subarray_with_least_average.dart';
+export '2D/VeryEasy/maximum_subarray_sum_of_fixed_length.dart';
 export '2D/matrix_multiplication.dart';
 export '2D/range_sum.dart';
-export '2D/sum_of_all_sub_array.dart';
