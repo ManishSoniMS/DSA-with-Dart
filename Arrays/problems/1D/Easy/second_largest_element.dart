@@ -6,11 +6,11 @@ int min = -1000000;
 
 void secondLargestElement() {
   final A = [0, min];
-  final ans = _solve(A);
+  final ans = _Solve(A);
   print(ans);
 }
 
-int _solve(List<int> A) {
+int _Solve(List<int> A) {
   if (A.length < 2) return -1;
   int f = min;
   int s = min;

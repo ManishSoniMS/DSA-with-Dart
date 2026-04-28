@@ -58,10 +58,10 @@ Their sums are: 2 + 1 + 3 + 3 + 4 + 6 = 19
 
 void SumOfAllSubArray() {
   List<int> A = [1, 2, 3];
-  print(_solve(A));
+  print(_Solve(A));
 }
 
-int _solve(List<int> A) {
+int _Solve(List<int> A) {
   int n = A.length;
   int totalSum = 0;
 

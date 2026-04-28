@@ -55,14 +55,14 @@ Buy the stock on day 0, and sell it on day 2.
 
 import 'dart:math' as Math;
 
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 void BestTimeToBuyAndSellStocks() {
   List<int> A = [1, 4, 5, 2, 4];
-  print(_solve(A));
+  print(_Solve(A));
 }
 
-int _solve(List<int> A) {
+int _Solve(List<int> A) {
   int n = A.length;
   int maxProfit = 0;
 

@@ -24,10 +24,10 @@ e.g.,
 void equilibriumIndex() {
   // List<int> A =  [-7, 1, 5, 2, -4, 3, 0];
   List<int> A = [10, 5, 2, 3, 0];
-  print(_solve(A));
+  print(_Solve(A));
 }
 
-int _solve(List<int> A) {
+int _Solve(List<int> A) {
   int N = A.length;
 
   int sum = 0;

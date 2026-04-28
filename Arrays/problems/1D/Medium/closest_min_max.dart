@@ -51,7 +51,7 @@ Take the last 3 elements of the array.
 */
 import 'dart:math' as Math;
 
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 /// Edge Case :: element may repeat
 void closestMinMax() {
@@ -59,10 +59,10 @@ void closestMinMax() {
   // final A = [2, 6, 1, 6, 9];
   final A = [343, 291, 963, 165, 152];
 
-  print(_solve(A));
+  print(_Solve(A));
 }
 
-int _solve(List<int> A) {
+int _Solve(List<int> A) {
   int n = A.length;
   int min = Int.max.toInt();
   int max = Int.min.toInt();
@@ -130,7 +130,7 @@ int _solve(List<int> A) {
   return ans;
 }
 
-// int _solve(List<int> A) {
+// int _Solve(List<int> A) {
 //   int min = A[0];
 //   int minIndex = 0;
 //   int max = A[0];

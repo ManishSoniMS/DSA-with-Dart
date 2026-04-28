@@ -5,10 +5,10 @@ void rangeSum() {
     [0, 2],
     [2, 3],
   ];
-  print(_solve(A, B));
+  print(_Solve(A, B));
 }
 
-List<int> _solve(List<int> A, List<List<int>> B) {
+List<int> _Solve(List<int> A, List<List<int>> B) {
   int QN = B.length;
   if (QN == 0) return [];
   List<int> ans = List<int>.generate(QN, (_) => 0);

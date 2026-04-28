@@ -54,10 +54,10 @@ Therefore, the required output is 3.
 
 void SpecialIndex() {
   List<int> A = [2, 1, 6, 4];
-  print(_solve(A));
+  print(_Solve(A));
 }
 
-int _solve(List<int> A) {
+int _Solve(List<int> A) {
   int n = A.length;
 
   /// Brute Force Approach

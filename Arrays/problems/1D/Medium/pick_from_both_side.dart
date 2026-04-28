@@ -21,15 +21,15 @@ e.g.,
 
 import 'dart:math' as Math;
 
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 void pickFromBothSide() {
   List<int> A = [5, -2, 3, 1, 2];
   int B = 3;
-  print(_solve(A, B));
+  print(_Solve(A, B));
 }
 
-int _solve(List<int> A, int B) {
+int _Solve(List<int> A, int B) {
   int n = A.length;
   int maxSum = Int.min.toInt();
 

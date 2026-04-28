@@ -7,11 +7,11 @@
 
 void minimumTime() {
   final A = [2, 4, 1, 3, 2];
-  final ans = _solve(A);
+  final ans = _Solve(A);
   print(ans);
 }
 
-int _solve(List<int> A) {
+int _Solve(List<int> A) {
   int l = A.length;
   int sum = 0;
   int max = A[0];

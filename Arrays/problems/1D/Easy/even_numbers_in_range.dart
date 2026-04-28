@@ -66,10 +66,10 @@ void EvenNumbersInARange() {
     [1, 3],
     [2, 4],
   ];
-  print(_solve(A, B));
+  print(_Solve(A, B));
 }
 
-List<int> _solve(List<int> A, List<List<int>> B) {
+List<int> _Solve(List<int> A, List<List<int>> B) {
   int n = A.length;
   int Q = B.length;
   List<int> result = List<int>.generate(Q, (_) => 0);

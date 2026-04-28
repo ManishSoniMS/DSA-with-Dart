@@ -8,14 +8,14 @@ e.g.,
   [17, 2, 5]
 */
 
-import '../../../constants.dart';
+import '../../../../constants.dart';
 
 void leaderInArray() {
   List<int> A = [16, 17, 4, 3, 5, 2];
-  print(_solve(A));
+  print(_Solve(A));
 }
 
-List<int> _solve(List<int> A) {
+List<int> _Solve(List<int> A) {
   List<int> ans = [];
 
   /// Brute Force Approach

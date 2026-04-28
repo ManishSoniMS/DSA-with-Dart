@@ -1,9 +1,9 @@
 void generateSubArray() {
   List<int> A = [1, 2, 3, 4];
-  print(_solve(A));
+  print(_Solve(A));
 }
 
-List<List<int>> _solve(List<int> A) {
+List<List<int>> _Solve(List<int> A) {
   List<List<int>> ans = [];
 
   for (int i = 0; i < A.length; i++) {

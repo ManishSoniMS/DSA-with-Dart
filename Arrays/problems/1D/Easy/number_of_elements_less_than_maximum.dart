@@ -6,11 +6,11 @@
 
 void numberOfElementsLessThanMaximum() {
   final A = [3, 5, 3, 2, 9, 3, 10, 10, 10, 3]; // 7
-  final ans = _solve(A);
+  final ans = _Solve(A);
   print(ans);
 }
 
-int _solve(List<int> A) {
+int _Solve(List<int> A) {
   if (A.isEmpty) return 0;
   int max = A[0];
   int countMax = 0;
