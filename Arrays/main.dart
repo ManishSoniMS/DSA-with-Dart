@@ -23,6 +23,5 @@ void main() {
   // MinimumSwaps();
   // SubArrayWithLeastAverage();
   // CountingSubarraysEasy();
-  // GoodSubArraysEasy();
-  KthSmallestElement();
+  GoodSubArraysEasy();
 }

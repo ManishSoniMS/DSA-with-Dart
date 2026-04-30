@@ -1,5 +1,9 @@
 import 'problems/problems.dart';
 
 void main() {
-  bubbleSort();
+  // BubbleSort();
+  // KthSmallestElement();
+  // NobleInteger();
+  // ElementsRemoval();
+  ArithmeticProgression();
 }

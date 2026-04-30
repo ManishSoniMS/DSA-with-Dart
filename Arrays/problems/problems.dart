@@ -2,7 +2,6 @@ export '1D/Easy/best_time_to_buy_and_sell_stocks.dart';
 export '1D/Easy/check_pair.dart';
 export '1D/Easy/equilibrium_index.dart';
 export '1D/Easy/even_numbers_in_range.dart';
-export '1D/Easy/kth_smallest_element.dart';
 export '1D/Easy/leader_in_array.dart';
 export '1D/Easy/minimum_swaps.dart';
 export '1D/Easy/minimum_time.dart';

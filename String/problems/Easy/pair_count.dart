@@ -1,10 +1,10 @@
 void pairCount() {
   String A = "GUGPUAGAFQBMPYAGGAAOALAELGGGAOGLGEGZ"; // 52
   // String A = "ABGAG"; // 3
-  print(_solve(A));
+  print(_Solve(A));
 }
 
-int _solve(String A) {
+int _Solve(String A) {
   int count = 0;
 
   /// Brute Force Approach
