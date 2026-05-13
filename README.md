@@ -12,6 +12,7 @@ A personal study repository of classic DSA problems implemented in **Dart**, org
 - [Chapter 2 — Arrays (2D)](#chapter-2--arrays-2d)
 - [Chapter 3 — Strings](#chapter-3--strings)
 - [Chapter 4 — Sorting](#chapter-4--sorting)
+- [Chapter 5 — Searching](#chapter-5--searching)
 - [Shared Utilities](#shared-utilities)
 
 ---
@@ -26,6 +27,7 @@ Run any module from the project root:
 dart run Arrays/main.dart
 dart run String/main.dart
 dart run Sorting/main.dart
+dart run Searching/main.dart
 ```
 
 Each `main.dart` has one active function call and the rest commented out. To run a specific problem, swap the active call:
@@ -64,17 +66,41 @@ DSA/
 │       ├── problems.dart
 │       └── Easy/
 │           └── pair_count.dart
-└── Sorting/
+├── Sorting/
+│   ├── main.dart
+│   └── problems/
+│       ├── problems.dart
+│       ├── fundamentals/           # Core sorting algorithm implementations
+│       │   ├── partition.dart
+│       │   └── quick_sort.dart
+│       ├── VeryEasy/               # Very easy sorting problems
+│       │   └── arithmetic_progression.dart
+│       ├── Easy/                   # Easy sorting problems
+│       │   ├── bubble_sort.dart
+│       │   ├── elements_removal.dart
+│       │   ├── kth_smallest_element.dart
+│       │   └── noble_integer.dart
+│       └── QuickSort/
+│           ├── Easy/               # Easy comparator-based sorting problems
+│           │   ├── factors_sort.dart
+│           │   ├── largest_number.dart
+│           │   ├── tens_digit_sorting.dart
+│           │   └── wave_array.dart
+│           └── Medium/             # Medium comparator-based sorting problems
+│               └── b_closest_points_to_origin.dart
+└── Searching/
     ├── main.dart
-    └── problems/
-        ├── problems.dart
-        ├── VeryEasy/               # Very easy sorting problems
-        │   └── arithmetic_progression.dart
-        └── Easy/                   # Easy sorting problems
-            ├── bubble_sort.dart
-            ├── elements_removal.dart
-            ├── kth_smallest_element.dart
-            └── noble_integer.dart
+    └── BinarySearch/
+        └── problems/
+            ├── problems.dart
+            ├── Easy/
+            │   ├── maximum_height_of_staircase.dart
+            │   ├── sorted_insert_position.dart
+            │   └── square_root_of_integer.dart
+            └── Medium/
+                ├── find_peak_element.dart
+                ├── matrix_search.dart
+                └── search_for_range.dart
 ```
 
 ---
@@ -353,9 +379,24 @@ Find the total sum of all subarray sums of array `A`.
 
 ---
 
+#### 2.7 Anti Diagonals
+**File:** `Arrays/problems/2D/Easy/anti_diagonals.dart`
+
+Given an N×N matrix, return a 2D array of its anti-diagonals. Each row of the result is one anti-diagonal, padded with 0s to length N.
+
+| Approach                               | Time  | Space  |
+|----------------------------------------|-------|--------|
+| Brute Force (scan all cells per diag)  | O(N³) | O(N²)  |
+| Better (walk each diagonal explicitly) | O(N²) | O(N²)  |
+| Optimal (unified start-point formula)  | O(N²) | O(N²)  |
+
+**Key idea:** For diagonal `k` (0-indexed, 0..2N-2), starting row is `max(0, k-(N-1))` and starting col is `k - row`. Walk down-left until out of bounds.
+
+---
+
 ### Medium
 
-#### 2.7 Counting Subarrays with Sum < B
+#### 2.8 Counting Subarrays with Sum < B
 **File:** `Arrays/problems/2D/Medium/counting_subarrays_easy.dart`
 
 Count subarrays whose sum is strictly less than `B`.
@@ -370,7 +411,7 @@ Count subarrays whose sum is strictly less than `B`.
 
 ---
 
-#### 2.8 Good Subarrays
+#### 2.9 Good Subarrays
 **File:** `Arrays/problems/2D/Medium/good_subarrays_easy.dart`
 
 Count "good" subarrays: even-length with sum < B, or odd-length with sum > B.
@@ -383,7 +424,7 @@ Count "good" subarrays: even-length with sum < B, or odd-length with sum > B.
 
 ---
 
-#### 2.9 Subarray with Least Average
+#### 2.10 Subarray with Least Average
 **File:** `Arrays/problems/2D/Medium/subarray_with_least_average.dart`
 
 Given array `A` and window size `B`, return the starting index of the subarray of size `B` with the least average.
@@ -491,14 +532,147 @@ Find if any integer `p` in the array satisfies: the count of elements strictly g
 
 ---
 
+### QuickSort — Easy
+
+#### 4.6 Factors Sort
+**File:** `Sorting/problems/QuickSort/Easy/factors_sort.dart`
+
+Sort an array in increasing order of the number of distinct factors of each element. Break ties by value (smaller value first).
+
+| Approach                                         | Time                    | Space |
+|--------------------------------------------------|-------------------------|-------|
+| Custom Comparator (sort with factor count)       | O(N·√M·log N)           | O(1)  |
+
+**Key idea:** For each element compute its factor count in O(√M). Pass a custom comparator to `sort()` that compares factor counts, falling back to value for ties.
+
+---
+
+#### 4.7 Largest Number
+**File:** `Sorting/problems/QuickSort/Easy/largest_number.dart`
+
+Given an array of non-negative integers, arrange them to form the largest possible number. Return it as a string.
+
+| Approach                                        | Time       | Space |
+|-------------------------------------------------|------------|-------|
+| Custom Comparator (string concatenation order)  | O(N log N) | O(N)  |
+
+**Key idea:** For two numbers `a` and `b`, prefer the order that yields the larger concatenation: compare `"$a$b"` vs `"$b$a"` as integers.
+
+---
+
+#### 4.8 Tens Digit Sorting
+**File:** `Sorting/problems/QuickSort/Easy/tens_digit_sorting.dart`
+
+Sort an array by the tens digit of each element (ascending). Break ties by value (larger value first). Numbers with no tens digit are treated as having tens digit 0.
+
+| Approach                             | Time       | Space |
+|--------------------------------------|------------|-------|
+| Custom Comparator (tens digit)       | O(N log N) | O(1)  |
+
+**Key idea:** Extract tens digit as `(x ~/ 10) % 10`. Sort ascending by this; for ties sort descending by value (`b - a`).
+
+---
+
+#### 4.9 Wave Array
+**File:** `Sorting/problems/QuickSort/Easy/wave_array.dart`
+
+Arrange array elements so that `a1 >= a2 <= a3 >= a4 <= ...`. Return the lexicographically smallest such arrangement.
+
+| Approach                          | Time       | Space |
+|-----------------------------------|------------|-------|
+| Sort + Swap Adjacent Pairs        | O(N log N) | O(1)  |
+
+**Key idea:** Sort ascending, then swap every pair of adjacent elements `(A[0],A[1])`, `(A[2],A[3])`, … The sorted order guarantees lexicographic minimality.
+
+---
+
+### QuickSort — Medium
+
+#### 4.10 B Closest Points to Origin
+**File:** `Sorting/problems/QuickSort/Medium/b_closest_points_to_origin.dart`
+
+Given a list of 2D points and integer `B`, return the `B` closest points to the origin by Euclidean distance.
+
+> **Status:** Stub — implementation pending.
+
+---
+
+## Chapter 5 — Searching
+
+### Binary Search — Easy
+
+#### 5.1 Maximum Height of Staircase
+**File:** `Searching/BinarySearch/problems/Easy/maximum_height_of_staircase.dart`
+
+Given `A` square blocks (each height 1), find the maximum height of a staircase where step `i` requires `i` blocks.
+
+| Approach                            | Time       | Space |
+|-------------------------------------|------------|-------|
+| Brute Force (linear scan)           | O(√A)      | O(1)  |
+| Optimal (Binary Search)             | O(log A)   | O(1)  |
+
+**Key idea:** Binary search on the height `h`. Step `h` requires `h*(h+1)/2` blocks total. Find the largest `h` where this sum ≤ `A`.
+
+---
+
+#### 5.2 Sorted Insert Position
+**File:** `Searching/BinarySearch/problems/Easy/sorted_insert_position.dart`
+
+Given a sorted array `A` and target `B`, return its index if found; otherwise return the index of the least element ≥ `B`. If no such element exists, return `N`.
+
+| Approach        | Time     | Space |
+|-----------------|----------|-------|
+| Binary Search   | O(log N) | O(1)  |
+
+**Key idea:** Standard lower-bound binary search. Track the last position where `A[mid] < B` to compute the insertion point.
+
+---
+
+#### 5.3 Square Root of Integer
+**File:** `Searching/BinarySearch/problems/Easy/square_root_of_integer.dart`
+
+Compute `floor(sqrt(A))` without using the standard library sqrt. Handle values up to 10⁹.
+
+| Approach                      | Time     | Space |
+|-------------------------------|----------|-------|
+| Brute Force (linear scan)     | O(√A)    | O(1)  |
+| Optimal (Binary Search)       | O(log A) | O(1)  |
+
+**Key idea:** Binary search in `[1, A]`. Use `mid == A/mid` (integer division) to avoid overflow from `mid*mid`. Track the last valid `mid` where `mid < A/mid` as the answer.
+
+---
+
+### Binary Search — Medium
+
+#### 5.4 Find Peak Element
+**File:** `Searching/BinarySearch/problems/Medium/find_peak_element.dart`
+
+> **Status:** Stub — implementation pending.
+
+---
+
+#### 5.5 Matrix Search
+**File:** `Searching/BinarySearch/problems/Medium/matrix_search.dart`
+
+> **Status:** Stub — implementation pending.
+
+---
+
+#### 5.6 Search for Range
+**File:** `Searching/BinarySearch/problems/Medium/search_for_range.dart`
+
+> **Status:** Stub — implementation pending.
+
+---
+
 ## Shared Utilities
 
 ### `constants.dart`
 
 ```dart
 class Int {
-  static num get max => 100000000;
-  static num get min => -100000000;
+  static num get max => 9007199254740991;
+  static num get min => -9007199254740991;
 }
 ```
 
@@ -512,34 +686,46 @@ import '../../../constants.dart';
 
 ## Problems at a Glance
 
-| #  | Problem                              | Topic     | Difficulty | Optimal TC | File                                                                    |
-|----|--------------------------------------|-----------|------------|------------|-------------------------------------------------------------------------|
-| 1  | Generate All Sub-arrays              | Arrays 1D | VeryEasy   | O(N³)      | `Arrays/problems/1D/VeryEasy/sub_array.dart`                            |
-| 2  | Check Pair Sum                       | Arrays 1D | Easy       | O(N)       | `Arrays/problems/1D/Easy/check_pair.dart`                               |
-| 3  | Rotate Array                         | Arrays 1D | Easy       | O(N)       | `Arrays/problems/1D/Easy/rotate_array.dart`                             |
-| 4  | Minimum Time to Equal Elements       | Arrays 1D | Easy       | O(N)       | `Arrays/problems/1D/Easy/minimum_time.dart`                             |
-| 5  | Second Largest Element               | Arrays 1D | Easy       | O(N)       | `Arrays/problems/1D/Easy/second_largest_element.dart`                   |
-| 6  | Count Elements < Maximum             | Arrays 1D | Easy       | O(N)       | `Arrays/problems/1D/Easy/number_of_elements_less_than_maximum.dart`     |
-| 7  | Equilibrium Index                    | Arrays 1D | Easy       | O(N)       | `Arrays/problems/1D/Easy/equilibrium_index.dart`                        |
-| 8  | Leader in Array                      | Arrays 1D | Easy       | O(N)       | `Arrays/problems/1D/Easy/leader_in_array.dart`                          |
-| 9  | Best Time to Buy & Sell Stocks       | Arrays 1D | Easy       | O(N)       | `Arrays/problems/1D/Easy/best_time_to_buy_and_sell_stocks.dart`         |
-| 10 | Even Numbers in a Range              | Arrays 1D | Easy       | O(N+Q)     | `Arrays/problems/1D/Easy/even_numbers_in_range.dart`                    |
-| 11 | Minimum Swaps                        | Arrays 1D | Easy       | O(N)       | `Arrays/problems/1D/Easy/minimum_swaps.dart`                            |
-| 12 | Pick From Both Sides                 | Arrays 1D | Medium     | O(N)       | `Arrays/problems/1D/Medium/pick_from_both_side.dart`                    |
-| 13 | Closest Min & Max                    | Arrays 1D | Medium     | O(N)       | `Arrays/problems/1D/Medium/closest_min_max.dart`                        |
-| 14 | Special Index                        | Arrays 1D | Medium     | O(N)       | `Arrays/problems/1D/Medium/special_index.dart`                          |
-| 15 | Maximum Subarray Sum of Fixed Length | Arrays 2D | VeryEasy   | O(N)       | `Arrays/problems/2D/VeryEasy/maximum_subarray_sum_of_fixed_length.dart` |
-| 16 | Range Sum Query (Even Indices)       | Arrays 2D | Easy       | O(N+Q)     | `Arrays/problems/2D/Easy/range_sum.dart`                                |
-| 17 | Matrix Multiplication                | Arrays 2D | Easy       | O(N³)      | `Arrays/problems/2D/Easy/matrix_multiplication.dart`                    |
-| 18 | Maximum Sub Array (bounded)          | Arrays 2D | Easy       | O(N)       | `Arrays/problems/2D/Easy/maximum_sub_array.dart`                        |
-| 19 | Subarray with Given Sum and Length   | Arrays 2D | Easy       | O(N)       | `Arrays/problems/2D/Easy/sub_array_with_given_sum_and_length.dart`      |
-| 20 | Sum of All Sub-arrays                | Arrays 2D | Easy       | O(N)       | `Arrays/problems/2D/Easy/sum_of_all_sub_array.dart`                     |
-| 21 | Counting Subarrays (sum < B)         | Arrays 2D | Medium     | O(N)       | `Arrays/problems/2D/Medium/counting_subarrays_easy.dart`                |
-| 22 | Good Subarrays                       | Arrays 2D | Medium     | O(N²)      | `Arrays/problems/2D/Medium/good_subarrays_easy.dart`                    |
-| 23 | Subarray with Least Average          | Arrays 2D | Medium     | O(N)       | `Arrays/problems/2D/Medium/subarray_with_least_average.dart`            |
-| 24 | Count "AG" Pairs                     | Strings   | Easy       | O(N)       | `String/problems/Easy/pair_count.dart`                                  |
-| 25 | Arithmetic Progression               | Sorting   | VeryEasy   | O(N)       | `Sorting/problems/VeryEasy/arithmetic_progression.dart`                 |
-| 26 | Bubble Sort                          | Sorting   | Easy       | O(N²)      | `Sorting/problems/Easy/bubble_sort.dart`                                |
-| 27 | Elements Removal                     | Sorting   | Easy       | O(N log N) | `Sorting/problems/Easy/elements_removal.dart`                           |
-| 28 | Kth Smallest Element                 | Sorting   | Easy       | O(N) avg   | `Sorting/problems/Easy/kth_smallest_element.dart`                       |
-| 29 | Noble Integer                        | Sorting   | Easy       | O(N log N) | `Sorting/problems/Easy/noble_integer.dart`                              |
+| #  | Problem                              | Topic        | Difficulty | Optimal TC  | File                                                                         |
+|----|--------------------------------------|--------------|------------|-------------|------------------------------------------------------------------------------|
+| 1  | Generate All Sub-arrays              | Arrays 1D    | VeryEasy   | O(N³)       | `Arrays/problems/1D/VeryEasy/sub_array.dart`                                 |
+| 2  | Check Pair Sum                       | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/check_pair.dart`                                    |
+| 3  | Rotate Array                         | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/rotate_array.dart`                                  |
+| 4  | Minimum Time to Equal Elements       | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/minimum_time.dart`                                  |
+| 5  | Second Largest Element               | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/second_largest_element.dart`                        |
+| 6  | Count Elements < Maximum             | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/number_of_elements_less_than_maximum.dart`          |
+| 7  | Equilibrium Index                    | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/equilibrium_index.dart`                             |
+| 8  | Leader in Array                      | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/leader_in_array.dart`                               |
+| 9  | Best Time to Buy & Sell Stocks       | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/best_time_to_buy_and_sell_stocks.dart`              |
+| 10 | Even Numbers in a Range              | Arrays 1D    | Easy       | O(N+Q)      | `Arrays/problems/1D/Easy/even_numbers_in_range.dart`                         |
+| 11 | Minimum Swaps                        | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/minimum_swaps.dart`                                 |
+| 12 | Pick From Both Sides                 | Arrays 1D    | Medium     | O(N)        | `Arrays/problems/1D/Medium/pick_from_both_side.dart`                         |
+| 13 | Closest Min & Max                    | Arrays 1D    | Medium     | O(N)        | `Arrays/problems/1D/Medium/closest_min_max.dart`                             |
+| 14 | Special Index                        | Arrays 1D    | Medium     | O(N)        | `Arrays/problems/1D/Medium/special_index.dart`                               |
+| 15 | Maximum Subarray Sum of Fixed Length | Arrays 2D    | VeryEasy   | O(N)        | `Arrays/problems/2D/VeryEasy/maximum_subarray_sum_of_fixed_length.dart`      |
+| 16 | Range Sum Query (Even Indices)       | Arrays 2D    | Easy       | O(N+Q)      | `Arrays/problems/2D/Easy/range_sum.dart`                                     |
+| 17 | Matrix Multiplication                | Arrays 2D    | Easy       | O(N³)       | `Arrays/problems/2D/Easy/matrix_multiplication.dart`                         |
+| 18 | Maximum Sub Array (bounded)          | Arrays 2D    | Easy       | O(N)        | `Arrays/problems/2D/Easy/maximum_sub_array.dart`                             |
+| 19 | Subarray with Given Sum and Length   | Arrays 2D    | Easy       | O(N)        | `Arrays/problems/2D/Easy/sub_array_with_given_sum_and_length.dart`           |
+| 20 | Sum of All Sub-arrays                | Arrays 2D    | Easy       | O(N)        | `Arrays/problems/2D/Easy/sum_of_all_sub_array.dart`                          |
+| 21 | Anti Diagonals                       | Arrays 2D    | Easy       | O(N²)       | `Arrays/problems/2D/Easy/anti_diagonals.dart`                                |
+| 22 | Counting Subarrays (sum < B)         | Arrays 2D    | Medium     | O(N)        | `Arrays/problems/2D/Medium/counting_subarrays_easy.dart`                     |
+| 23 | Good Subarrays                       | Arrays 2D    | Medium     | O(N²)       | `Arrays/problems/2D/Medium/good_subarrays_easy.dart`                         |
+| 24 | Subarray with Least Average          | Arrays 2D    | Medium     | O(N)        | `Arrays/problems/2D/Medium/subarray_with_least_average.dart`                 |
+| 25 | Count "AG" Pairs                     | Strings      | Easy       | O(N)        | `String/problems/Easy/pair_count.dart`                                       |
+| 26 | Arithmetic Progression               | Sorting      | VeryEasy   | O(N)        | `Sorting/problems/VeryEasy/arithmetic_progression.dart`                      |
+| 27 | Bubble Sort                          | Sorting      | Easy       | O(N²)       | `Sorting/problems/Easy/bubble_sort.dart`                                     |
+| 28 | Elements Removal                     | Sorting      | Easy       | O(N log N)  | `Sorting/problems/Easy/elements_removal.dart`                                |
+| 29 | Kth Smallest Element                 | Sorting      | Easy       | O(N) avg    | `Sorting/problems/Easy/kth_smallest_element.dart`                            |
+| 30 | Noble Integer                        | Sorting      | Easy       | O(N log N)  | `Sorting/problems/Easy/noble_integer.dart`                                   |
+| 31 | Factors Sort                         | Sorting      | Easy       | O(N·√M·lgN) | `Sorting/problems/QuickSort/Easy/factors_sort.dart`                          |
+| 32 | Largest Number                       | Sorting      | Easy       | O(N log N)  | `Sorting/problems/QuickSort/Easy/largest_number.dart`                        |
+| 33 | Tens Digit Sorting                   | Sorting      | Easy       | O(N log N)  | `Sorting/problems/QuickSort/Easy/tens_digit_sorting.dart`                    |
+| 34 | Wave Array                           | Sorting      | Easy       | O(N log N)  | `Sorting/problems/QuickSort/Easy/wave_array.dart`                            |
+| 35 | B Closest Points to Origin           | Sorting      | Medium     | —           | `Sorting/problems/QuickSort/Medium/b_closest_points_to_origin.dart`          |
+| 36 | Maximum Height of Staircase          | Searching    | Easy       | O(log A)    | `Searching/BinarySearch/problems/Easy/maximum_height_of_staircase.dart`      |
+| 37 | Sorted Insert Position               | Searching    | Easy       | O(log N)    | `Searching/BinarySearch/problems/Easy/sorted_insert_position.dart`           |
+| 38 | Square Root of Integer               | Searching    | Easy       | O(log A)    | `Searching/BinarySearch/problems/Easy/square_root_of_integer.dart`           |
+| 39 | Find Peak Element                    | Searching    | Medium     | —           | `Searching/BinarySearch/problems/Medium/find_peak_element.dart`              |
+| 40 | Matrix Search                        | Searching    | Medium     | —           | `Searching/BinarySearch/problems/Medium/matrix_search.dart`                  |
+| 41 | Search for Range                     | Searching    | Medium     | —           | `Searching/BinarySearch/problems/Medium/search_for_range.dart`               |

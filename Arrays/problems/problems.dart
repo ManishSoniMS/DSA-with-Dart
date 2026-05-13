@@ -12,6 +12,7 @@ export '1D/Medium/closest_min_max.dart';
 export '1D/Medium/pick_from_both_side.dart';
 export '1D/Medium/special_index.dart';
 export '1D/VeryEasy/sub_array.dart';
+export '2D/Easy/anti_diagonals.dart';
 export '2D/Easy/matrix_multiplication.dart';
 export '2D/Easy/maximum_sub_array.dart';
 export '2D/Easy/range_sum.dart';

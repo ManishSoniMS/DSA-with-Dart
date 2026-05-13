@@ -5,5 +5,12 @@ void main() {
   // KthSmallestElement();
   // NobleInteger();
   // ElementsRemoval();
-  ArithmeticProgression();
+  // ArithmeticProgression();
+  // Partition();
+  // QuickSort();
+  // LargestNumber();
+  // FactorsSort();
+  // WaveArray();
+  // TensDigitSorting();
+  BCLosestPointToOrigin();
 }
