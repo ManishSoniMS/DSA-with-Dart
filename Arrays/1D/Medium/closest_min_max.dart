@@ -51,7 +51,7 @@ Take the last 3 elements of the array.
 */
 import 'dart:math' as Math;
 
-import '../../../../constants.dart';
+import '../../../constants.dart';
 
 /// Edge Case :: element may repeat
 void closestMinMax() {

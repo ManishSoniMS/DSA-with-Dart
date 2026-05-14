@@ -8,7 +8,7 @@ e.g.,
   [17, 2, 5]
 */
 
-import '../../../../constants.dart';
+import '../../../constants.dart';
 
 void leaderInArray() {
   List<int> A = [16, 17, 4, 3, 5, 2];

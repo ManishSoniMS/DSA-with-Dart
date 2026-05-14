@@ -1,4 +1,4 @@
-import 'problems/problems.dart';
+import '1D.dart';
 
 void main() {
   // EvenNumbersInARange();
@@ -13,16 +13,6 @@ void main() {
   // secondLargestElement();
   // numberOfElementsLessThanMaximum();
   // generateSubArray();
-  // rangeSum();
-  // matrixMultiplication();
   // closestMinMax();
-  // SumOfAllSubArray();
-  // MaximumSubArray();
-  // SubArrayWithGivenSumAndLength();
-  // MaximumSubArraySumOfFixedLength();
-  // MinimumSwaps();
-  // SubArrayWithLeastAverage();
-  // CountingSubarraysEasy();
-  // GoodSubArraysEasy();
-  AntiDiagonals();
+  MinimumSwaps();
 }

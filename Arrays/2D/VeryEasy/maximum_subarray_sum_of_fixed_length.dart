@@ -56,7 +56,7 @@ Subarray with maximum sum is [6, 5, 11] with sum 22.
 
 import 'dart:math' as Math;
 
-import '../../../../constants.dart';
+import '../../../constants.dart';
 
 void MaximumSubArraySumOfFixedLength() {
   List<int> A = [3, 9, 5, 6, 5, 11];

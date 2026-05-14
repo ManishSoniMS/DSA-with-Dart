@@ -1,11 +1,10 @@
-import 'BinarySearch/problems/problems.dart';
+import 'BinarySearch.dart';
 
 void main() {
-  /// binary search
   // SquareRootOfInteger();
   // SortedInsertPosition();
-  MaximumHeightOfStaircase();
+  // MaximumHeightOfStaircase();
   // FindPeakElement();
-  // MatrixSearch();
   // SearchForRange();
+  MatrixSearch();
 }

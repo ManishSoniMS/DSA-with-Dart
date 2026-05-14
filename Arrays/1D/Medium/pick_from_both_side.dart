@@ -21,7 +21,7 @@ e.g.,
 
 import 'dart:math' as Math;
 
-import '../../../../constants.dart';
+import '../../../constants.dart';
 
 void pickFromBothSide() {
   List<int> A = [5, -2, 3, 1, 2];

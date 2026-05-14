@@ -24,20 +24,22 @@ A personal study repository of classic DSA problems implemented in **Dart**, org
 Run any module from the project root:
 
 ```sh
-dart run Arrays/main.dart
+dart run Arrays/1D/main.dart
+dart run Arrays/2D/main.dart
 dart run String/main.dart
-dart run Sorting/main.dart
-dart run Searching/main.dart
+dart run Sorting/BubbleSort/main.dart
+dart run Sorting/QuickSort/main.dart
+dart run Searching/BinarySearch/main.dart
 ```
 
 Each `main.dart` has one active function call and the rest commented out. To run a specific problem, swap the active call:
 
 ```dart
-// Arrays/main.dart
+// Sorting/BubbleSort/main.dart
 void main() {
-  equilibriumIndex();   // ← uncomment the one you want
-  // checkPair();
-  // leaderInArray();
+  BubbleSort();         // ← uncomment the one you want
+  // ElementsRemoval();
+  // KthSmallestElement();
 }
 ```
 
@@ -49,17 +51,18 @@ void main() {
 DSA/
 ├── constants.dart                  # Shared Int.max / Int.min constants
 ├── Arrays/
-│   ├── main.dart                   # Entry point for Arrays module
-│   └── problems/
-│       ├── problems.dart           # Barrel export for all array problems
-│       ├── 1D/
-│       │   ├── VeryEasy/           # Very easy 1D problems
-│       │   ├── Easy/               # Easy 1D problems
-│       │   └── Medium/             # Medium 1D problems
-│       └── 2D/
-│           ├── VeryEasy/           # Very easy 2D / subarray problems
-│           ├── Easy/               # Easy 2D problems
-│           └── Medium/             # Medium 2D / subarray problems
+│   ├── 1D/
+│   │   ├── 1D.dart                 # Barrel export for 1D problems
+│   │   ├── main.dart               # Entry point for Arrays 1D
+│   │   ├── VeryEasy/
+│   │   ├── Easy/
+│   │   └── Medium/
+│   └── 2D/
+│       ├── 2D.dart                 # Barrel export for 2D problems
+│       ├── main.dart               # Entry point for Arrays 2D
+│       ├── VeryEasy/
+│       ├── Easy/
+│       └── Medium/
 ├── String/
 │   ├── main.dart
 │   └── problems/
@@ -67,40 +70,41 @@ DSA/
 │       └── Easy/
 │           └── pair_count.dart
 ├── Sorting/
-│   ├── main.dart
-│   └── problems/
-│       ├── problems.dart
-│       ├── fundamentals/           # Core sorting algorithm implementations
+│   ├── BubbleSort/
+│   │   ├── BubbleSort.dart         # Barrel export for BubbleSort problems
+│   │   ├── main.dart               # Entry point for BubbleSort
+│   │   ├── VeryEasy/
+│   │   │   └── arithmetic_progression.dart
+│   │   └── Easy/
+│   │       ├── bubble_sort.dart
+│   │       ├── elements_removal.dart
+│   │       ├── kth_smallest_element.dart
+│   │       └── noble_integer.dart
+│   └── QuickSort/
+│       ├── QuickSort.dart          # Barrel export for QuickSort problems
+│       ├── main.dart               # Entry point for QuickSort
+│       ├── Fundamentals/
 │       │   ├── partition.dart
 │       │   └── quick_sort.dart
-│       ├── VeryEasy/               # Very easy sorting problems
-│       │   └── arithmetic_progression.dart
-│       ├── Easy/                   # Easy sorting problems
-│       │   ├── bubble_sort.dart
-│       │   ├── elements_removal.dart
-│       │   ├── kth_smallest_element.dart
-│       │   └── noble_integer.dart
-│       └── QuickSort/
-│           ├── Easy/               # Easy comparator-based sorting problems
-│           │   ├── factors_sort.dart
-│           │   ├── largest_number.dart
-│           │   ├── tens_digit_sorting.dart
-│           │   └── wave_array.dart
-│           └── Medium/             # Medium comparator-based sorting problems
-│               └── b_closest_points_to_origin.dart
+│       ├── Easy/
+│       │   ├── factors_sort.dart
+│       │   ├── largest_number.dart
+│       │   ├── tens_digit_sorting.dart
+│       │   └── wave_array.dart
+│       └── Medium/
+│           └── b_closest_points_to_origin.dart
 └── Searching/
-    ├── main.dart
     └── BinarySearch/
-        └── problems/
-            ├── problems.dart
-            ├── Easy/
-            │   ├── maximum_height_of_staircase.dart
-            │   ├── sorted_insert_position.dart
-            │   └── square_root_of_integer.dart
-            └── Medium/
-                ├── find_peak_element.dart
-                ├── matrix_search.dart
-                └── search_for_range.dart
+        ├── BinarySearch.dart       # Barrel export for BinarySearch problems
+        ├── main.dart               # Entry point for BinarySearch
+        ├── Easy/
+        │   ├── maximum_height_of_staircase.dart
+        │   ├── sorted_insert_position.dart
+        │   └── square_root_of_integer.dart
+        └── Medium/
+            ├── find_peak_element.dart
+            ├── matrix_search.dart
+            └── search_for_range.dart
 ```
 
 ---
@@ -462,7 +466,7 @@ Count the number of pairs `(i, j)` where `i < j`, `A[i] == 'A'`, and `A[j] == 'G
 ### VeryEasy
 
 #### 4.1 Arithmetic Progression
-**File:** `Sorting/problems/VeryEasy/arithmetic_progression.dart`
+**File:** `Sorting/BubbleSort/VeryEasy/arithmetic_progression.dart`
 
 Given an integer array, return 1 if it can be rearranged to form an arithmetic progression, else 0.
 
@@ -478,7 +482,7 @@ Given an integer array, return 1 if it can be rearranged to form an arithmetic p
 ### Easy
 
 #### 4.2 Bubble Sort
-**File:** `Sorting/problems/Easy/bubble_sort.dart`
+**File:** `Sorting/BubbleSort/Easy/bubble_sort.dart`
 
 Classic bubble sort with early-exit optimization.
 
@@ -491,7 +495,7 @@ Classic bubble sort with early-exit optimization.
 ---
 
 #### 4.3 Elements Removal
-**File:** `Sorting/problems/Easy/elements_removal.dart`
+**File:** `Sorting/BubbleSort/Easy/elements_removal.dart`
 
 Remove all elements from an array one at a time. Each removal costs the current sum of the array. Find the minimum total cost.
 
@@ -504,7 +508,7 @@ Remove all elements from an array one at a time. Each removal costs the current 
 ---
 
 #### 4.4 Kth Smallest Element
-**File:** `Sorting/problems/Easy/kth_smallest_element.dart`
+**File:** `Sorting/BubbleSort/Easy/kth_smallest_element.dart`
 
 Find the Bth smallest element in array `A` using at most B swaps.
 
@@ -519,7 +523,7 @@ Find the Bth smallest element in array `A` using at most B swaps.
 ---
 
 #### 4.5 Noble Integer
-**File:** `Sorting/problems/Easy/noble_integer.dart`
+**File:** `Sorting/BubbleSort/Easy/noble_integer.dart`
 
 Find if any integer `p` in the array satisfies: the count of elements strictly greater than `p` equals `p`. Return 1 if found, -1 otherwise.
 
@@ -535,7 +539,7 @@ Find if any integer `p` in the array satisfies: the count of elements strictly g
 ### QuickSort — Easy
 
 #### 4.6 Factors Sort
-**File:** `Sorting/problems/QuickSort/Easy/factors_sort.dart`
+**File:** `Sorting/QuickSort/Easy/factors_sort.dart`
 
 Sort an array in increasing order of the number of distinct factors of each element. Break ties by value (smaller value first).
 
@@ -548,7 +552,7 @@ Sort an array in increasing order of the number of distinct factors of each elem
 ---
 
 #### 4.7 Largest Number
-**File:** `Sorting/problems/QuickSort/Easy/largest_number.dart`
+**File:** `Sorting/QuickSort/Easy/largest_number.dart`
 
 Given an array of non-negative integers, arrange them to form the largest possible number. Return it as a string.
 
@@ -561,7 +565,7 @@ Given an array of non-negative integers, arrange them to form the largest possib
 ---
 
 #### 4.8 Tens Digit Sorting
-**File:** `Sorting/problems/QuickSort/Easy/tens_digit_sorting.dart`
+**File:** `Sorting/QuickSort/Easy/tens_digit_sorting.dart`
 
 Sort an array by the tens digit of each element (ascending). Break ties by value (larger value first). Numbers with no tens digit are treated as having tens digit 0.
 
@@ -647,21 +651,41 @@ Compute `floor(sqrt(A))` without using the standard library sqrt. Handle values 
 #### 5.4 Find Peak Element
 **File:** `Searching/BinarySearch/problems/Medium/find_peak_element.dart`
 
-> **Status:** Stub — implementation pending.
+Given array `A`, find any peak element — one that is ≥ both its neighbors (corner elements have only one neighbor). Guaranteed single peak. Return the peak value.
+
+| Approach                  | Time     | Space |
+|---------------------------|----------|-------|
+| Brute Force (linear scan) | O(N)     | O(1)  |
+| Optimal (Binary Search)   | O(log N) | O(1)  |
+
+**Key idea:** If `A[mid] < A[mid+1]`, peak must lie to the right → `low = mid+1`. Otherwise peak is at `mid` or to the left → `high = mid`. Converges to the peak index.
 
 ---
 
 #### 5.5 Matrix Search
 **File:** `Searching/BinarySearch/problems/Medium/matrix_search.dart`
 
-> **Status:** Stub — implementation pending.
+Given an N×M matrix where rows are sorted and each row's first element ≥ previous row's last element, determine if integer `B` exists. Return 1 if found, 0 otherwise.
+
+| Approach                                       | Time               | Space |
+|------------------------------------------------|--------------------|-------|
+| Binary search row + Binary search within row  | O(log N + log M)   | O(1)  |
+
+**Key idea:** Binary search rows to find the row where `first <= B <= last`. Then binary search that row for `B`.
 
 ---
 
 #### 5.6 Search for Range
 **File:** `Searching/BinarySearch/problems/Medium/search_for_range.dart`
 
-> **Status:** Stub — implementation pending.
+Given sorted array `A` and target `B`, return `[leftmost index, rightmost index]` of `B`. Return `[-1, -1]` if not found.
+
+| Approach                          | Time     | Space |
+|-----------------------------------|----------|-------|
+| Brute Force (linear scan)         | O(N)     | O(1)  |
+| Optimal (two binary searches)     | O(log N) | O(1)  |
+
+**Key idea:** `findFirst`: when `A[mid] == B`, record and set `high = mid - 1` to keep searching left. `findLast`: when `A[mid] == B`, record and set `low = mid + 1` to keep searching right.
 
 ---
 
@@ -726,6 +750,6 @@ import '../../../constants.dart';
 | 36 | Maximum Height of Staircase          | Searching    | Easy       | O(log A)    | `Searching/BinarySearch/problems/Easy/maximum_height_of_staircase.dart`      |
 | 37 | Sorted Insert Position               | Searching    | Easy       | O(log N)    | `Searching/BinarySearch/problems/Easy/sorted_insert_position.dart`           |
 | 38 | Square Root of Integer               | Searching    | Easy       | O(log A)    | `Searching/BinarySearch/problems/Easy/square_root_of_integer.dart`           |
-| 39 | Find Peak Element                    | Searching    | Medium     | —           | `Searching/BinarySearch/problems/Medium/find_peak_element.dart`              |
-| 40 | Matrix Search                        | Searching    | Medium     | —           | `Searching/BinarySearch/problems/Medium/matrix_search.dart`                  |
-| 41 | Search for Range                     | Searching    | Medium     | —           | `Searching/BinarySearch/problems/Medium/search_for_range.dart`               |
+| 39 | Find Peak Element                    | Searching    | Medium     | O(log N)    | `Searching/BinarySearch/problems/Medium/find_peak_element.dart`              |
+| 40 | Matrix Search                        | Searching    | Medium     | O(log N+M)  | `Searching/BinarySearch/problems/Medium/matrix_search.dart`                  |
+| 41 | Search for Range                     | Searching    | Medium     | O(log N)    | `Searching/BinarySearch/problems/Medium/search_for_range.dart`               |

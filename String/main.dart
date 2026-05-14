@@ -1,4 +1,4 @@
-import 'problems/problems.dart';
+import 'String.dart';
 
 void main() {
   pairCount();
