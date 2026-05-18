@@ -6,5 +6,14 @@ void main() {
   // MaximumHeightOfStaircase();
   // FindPeakElement();
   // SearchForRange();
-  MatrixSearch();
+  // MatrixSearch();
+  // PaintersPartitionProblem();
+  // AggressiveCow();
+  // AllocateBooks();
+  // AddOrNot();
+  // SpecialInteger();
+
+  // SingleElementInSortedArray();
+  // RotatedSortedArraySearch();
+  MedianOfTwoSortedArrays();
 }

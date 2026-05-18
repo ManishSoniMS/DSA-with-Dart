@@ -1,6 +1,15 @@
 export 'Easy/maximum_height_of_staircase.dart';
+export 'Easy/single_element_in_sorted_array.dart';
 export 'Easy/sorted_insert_position.dart';
 export 'Easy/square_root_of_integer.dart';
+export 'Medium/add_or_not.dart';
+export 'Medium/aggressive_cow.dart';
+export 'Medium/allocate_books.dart';
 export 'Medium/find_peak_element.dart';
+export 'Medium/matrix_median.dart';
 export 'Medium/matrix_search.dart';
+export 'Medium/median_of_two_sorted_arrays.dart';
+export 'Medium/painters_partition_problem.dart';
+export 'Medium/rotated_sorted_array_search.dart';
 export 'Medium/search_for_range.dart';
+export 'Medium/special_integer.dart';
