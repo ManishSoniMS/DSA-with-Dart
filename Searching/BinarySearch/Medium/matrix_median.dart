@@ -68,3 +68,16 @@ Explanation 2:
 
 Median is 17.
 */
+
+void MatrixMedian() {
+  List<List<int>> A = [
+    [1, 3, 5],
+    [2, 6, 9],
+    [3, 6, 9],
+  ];
+  print(_Solve(A));
+}
+
+int _Solve(List<List<int>> A) {
+  return -1;
+}

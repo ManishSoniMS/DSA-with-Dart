@@ -90,12 +90,7 @@ int _Solve(List<int> A, List<int> B) {
   }
   return C[C.length ~/ 2];
   */
+  if (N > M) _Solve(B, A);
 
-  return N > M ? _FindMedian(B, A) : _FindMedian(A, B);
-}
-
-int _FindMedian(List<int> small, List<int> large) {
-  int M = small.length;
-  int N = large.length;
   return -1;
 }

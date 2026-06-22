@@ -16,4 +16,5 @@ void main() {
   // SingleElementInSortedArray();
   // RotatedSortedArraySearch();
   MedianOfTwoSortedArrays();
+  MatrixMedian();
 }
