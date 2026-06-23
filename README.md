@@ -13,6 +13,7 @@ A personal study repository of classic DSA problems implemented in **Dart**, org
 - [Chapter 3 — Strings](#chapter-3--strings)
 - [Chapter 4 — Sorting](#chapter-4--sorting)
 - [Chapter 5 — Searching](#chapter-5--searching)
+- [Chapter 6 — Recursion](#chapter-6--recursion)
 - [Shared Utilities](#shared-utilities)
 
 ---
@@ -30,6 +31,7 @@ dart run String/main.dart
 dart run Sorting/BubbleSort/main.dart
 dart run Sorting/QuickSort/main.dart
 dart run Searching/BinarySearch/main.dart
+dart run Recursion/main.dart
 ```
 
 Each `main.dart` has one active function call and the rest commented out. To run a specific problem, swap the active call:
@@ -93,18 +95,41 @@ DSA/
 │       │   └── wave_array.dart
 │       └── Medium/
 │           └── b_closest_points_to_origin.dart
-└── Searching/
-    └── BinarySearch/
-        ├── BinarySearch.dart       # Barrel export for BinarySearch problems
-        ├── main.dart               # Entry point for BinarySearch
-        ├── Easy/
-        │   ├── maximum_height_of_staircase.dart
-        │   ├── sorted_insert_position.dart
-        │   └── square_root_of_integer.dart
-        └── Medium/
-            ├── find_peak_element.dart
-            ├── matrix_search.dart
-            └── search_for_range.dart
+├── Searching/
+│   └── BinarySearch/
+│       ├── BinarySearch.dart       # Barrel export for BinarySearch problems
+│       ├── main.dart               # Entry point for BinarySearch
+│       ├── Easy/
+│       │   ├── maximum_height_of_staircase.dart
+│       │   ├── single_element_in_sorted_array.dart
+│       │   ├── sorted_insert_position.dart
+│       │   └── square_root_of_integer.dart
+│       └── Medium/
+│           ├── add_or_not.dart
+│           ├── aggressive_cow.dart
+│           ├── allocate_books.dart
+│           ├── find_peak_element.dart
+│           ├── matrix_median.dart
+│           ├── matrix_search.dart
+│           ├── median_of_two_sorted_arrays.dart
+│           ├── minimum_difference.dart
+│           ├── painters_partition_problem.dart
+│           ├── rotated_sorted_array_search.dart
+│           ├── search_for_range.dart
+│           └── special_integer.dart
+└── Recursion/
+    ├── recursion.dart              # Barrel export for Recursion problems
+    ├── main.dart                   # Entry point for Recursion
+    ├── Easy/
+    │   ├── check_palindrome.dart
+    │   └── decreasing_increasing_in_one_Function.dart
+    └── Medium/
+        ├── all_indices_of_array.dart
+        ├── first_index_using_recursion.dart
+        ├── last_index_using_recursion.dart
+        ├── max_of_an_array_using_recursion.dart
+        ├── print_array_using_recursion.dart
+        └── tower_of_hanoi.dart
 ```
 
 ---
@@ -646,9 +671,22 @@ Compute `floor(sqrt(A))` without using the standard library sqrt. Handle values 
 
 ---
 
+#### 5.4 Single Element in Sorted Array
+**File:** `Searching/BinarySearch/Easy/single_element_in_sorted_array.dart`
+
+Given a sorted array where every element appears twice except one, find the single element. Adjacent duplicates are guaranteed.
+
+| Approach        | Time     | Space |
+|-----------------|----------|-------|
+| Binary Search   | O(log N) | O(1)  |
+
+**Key idea:** In an undisturbed pair region, even-index elements equal their right neighbor. If `A[mid]` breaks this pattern, the single element is on the left; otherwise on the right.
+
+---
+
 ### Binary Search — Medium
 
-#### 5.4 Find Peak Element
+#### 5.5 Find Peak Element
 **File:** `Searching/BinarySearch/problems/Medium/find_peak_element.dart`
 
 Given array `A`, find any peak element — one that is ≥ both its neighbors (corner elements have only one neighbor). Guaranteed single peak. Return the peak value.
@@ -662,7 +700,7 @@ Given array `A`, find any peak element — one that is ≥ both its neighbors (c
 
 ---
 
-#### 5.5 Matrix Search
+#### 5.6 Matrix Search
 **File:** `Searching/BinarySearch/problems/Medium/matrix_search.dart`
 
 Given an N×M matrix where rows are sorted and each row's first element ≥ previous row's last element, determine if integer `B` exists. Return 1 if found, 0 otherwise.
@@ -675,7 +713,7 @@ Given an N×M matrix where rows are sorted and each row's first element ≥ prev
 
 ---
 
-#### 5.6 Search for Range
+#### 5.7 Search for Range
 **File:** `Searching/BinarySearch/problems/Medium/search_for_range.dart`
 
 Given sorted array `A` and target `B`, return `[leftmost index, rightmost index]` of `B`. Return `[-1, -1]` if not found.
@@ -686,6 +724,202 @@ Given sorted array `A` and target `B`, return `[leftmost index, rightmost index]
 | Optimal (two binary searches)     | O(log N) | O(1)  |
 
 **Key idea:** `findFirst`: when `A[mid] == B`, record and set `high = mid - 1` to keep searching left. `findLast`: when `A[mid] == B`, record and set `low = mid + 1` to keep searching right.
+
+---
+
+#### 5.8 Rotated Sorted Array Search
+**File:** `Searching/BinarySearch/Medium/rotated_sorted_array_search.dart`
+
+Given a sorted array rotated at an unknown pivot, search for target `B`. Return its index or `-1`.
+
+| Approach        | Time     | Space |
+|-----------------|----------|-------|
+| Binary Search   | O(log N) | O(1)  |
+
+**Key idea:** At each step, one half is always sorted. Check if target lies in the sorted half; if so, search there, otherwise search the other half.
+
+---
+
+#### 5.9 Aggressive Cows
+**File:** `Searching/BinarySearch/Medium/aggressive_cow.dart`
+
+Place `B` cows in `N` stalls to maximize the minimum distance between any two cows.
+
+| Approach                           | Time            | Space |
+|------------------------------------|-----------------|-------|
+| Binary Search on Answer + Greedy   | O(N log(range)) | O(1)  |
+
+**Key idea:** Binary search on the minimum distance. For each candidate distance, greedily place cows left to right — if all `B` fit, try larger; otherwise try smaller.
+
+---
+
+#### 5.10 Painter's Partition Problem
+**File:** `Searching/BinarySearch/Medium/painters_partition_problem.dart`
+
+Given `A` painters, time-per-unit `B`, and board lengths `C`, minimize the time to paint all boards (painters paint contiguous sections).
+
+| Approach                           | Time            | Space |
+|------------------------------------|-----------------|-------|
+| Binary Search on Answer + Greedy   | O(N log(sum))   | O(1)  |
+
+**Key idea:** Binary search on the max board-length capacity per painter. Greedily assign boards; if painters needed ≤ A, the capacity is feasible.
+
+---
+
+#### 5.11 Matrix Median
+**File:** `Searching/BinarySearch/Medium/matrix_median.dart`
+
+Given an N×M matrix with sorted rows (N*M is odd), find the overall median.
+
+> **Status:** Stub — implementation pending.
+
+---
+
+#### 5.12 Median of Two Sorted Arrays
+**File:** `Searching/BinarySearch/Medium/median_of_two_sorted_arrays.dart`
+
+Given two sorted arrays, return the median of their merged result (floored).
+
+| Approach                         | Time           | Space |
+|----------------------------------|----------------|-------|
+| Brute Force (merge)              | O(N + M)       | O(N + M) |
+| Optimal (Binary Search)          | O(log(min(N,M))) | O(1) |
+
+> **Status:** Brute force implemented; optimal in progress.
+
+---
+
+#### 5.13 Minimum Difference
+**File:** `Searching/BinarySearch/Medium/minimum_difference.dart`
+
+Build a 1D array by picking one element per row of a 2D matrix. Minimize the cost (minimum absolute difference between adjacent picks).
+
+> **Status:** Stub — implementation pending.
+
+---
+
+#### 5.14 Add or Not
+**File:** `Searching/BinarySearch/Medium/add_or_not.dart`
+
+> **Status:** Stub — implementation pending.
+
+---
+
+#### 5.15 Allocate Books
+**File:** `Searching/BinarySearch/Medium/allocate_books.dart`
+
+> **Status:** Stub — implementation pending.
+
+---
+
+#### 5.16 Special Integer
+**File:** `Searching/BinarySearch/Medium/special_integer.dart`
+
+> **Status:** Stub — implementation pending.
+
+---
+
+## Chapter 6 — Recursion
+
+### Easy
+
+#### 6.1 Check Palindrome
+**File:** `Recursion/Easy/check_palindrome.dart`
+
+Check whether a string is a palindrome using recursion. Return 1 if palindrome, else 0.
+
+| Approach                    | Time | Space    |
+|-----------------------------|------|----------|
+| Brute Force (linear loop)   | O(N) | O(1)     |
+| Recursive (two-pointer)     | O(N) | O(N) stack |
+
+**Key idea:** Compare characters at positions `i` and `N-i-1`, recurse with `i+1`. Base case: `i > N/2`.
+
+---
+
+#### 6.2 Decreasing then Increasing
+**File:** `Recursion/Easy/decreasing_increasing_in_one_Function.dart`
+
+Print numbers from N down to 1 and then 1 up to N, using a single recursive function (no loops).
+
+| Approach   | Time | Space    |
+|------------|------|----------|
+| Recursion  | O(N) | O(N) stack |
+
+**Key idea:** Print `A` before recursion (decreasing) and after recursion (increasing). Base case: `A < 1`.
+
+---
+
+### Medium
+
+#### 6.3 Print Array Using Recursion
+**File:** `Recursion/Medium/print_array_using_recursion.dart`
+
+Print all elements of an array sequentially using recursion (no loops).
+
+| Approach   | Time | Space    |
+|------------|------|----------|
+| Recursion  | O(N) | O(N) stack |
+
+---
+
+#### 6.4 First Index Using Recursion
+**File:** `Recursion/Medium/first_index_using_recursion.dart`
+
+Find the first index at which integer `B` appears in array `A`. Return `-1` if not found.
+
+| Approach                  | Time | Space    |
+|---------------------------|------|----------|
+| Recursive (left to right) | O(N) | O(N) stack |
+
+**Key idea:** Recurse from index 0 forward. Return `i` on first match; return `-1` at end.
+
+---
+
+#### 6.5 Last Index Using Recursion
+**File:** `Recursion/Medium/last_index_using_recursion.dart`
+
+Find the last index at which integer `B` appears in array `A`. Return `-1` if not found.
+
+| Approach                  | Time | Space    |
+|---------------------------|------|----------|
+| Recursive (right to left) | O(N) | O(N) stack |
+
+**Key idea:** Recurse from the last index backward. Return `i` on first match; return `-1` at index < 0.
+
+---
+
+#### 6.6 All Indices of Array
+**File:** `Recursion/Medium/all_indices_of_array.dart`
+
+Find all indices at which target `B` occurs in array `A`. Return sorted list of indices.
+
+| Approach                  | Time | Space    |
+|---------------------------|------|----------|
+| Brute Force (linear loop) | O(N) | O(K)     |
+| Recursive                 | O(N) | O(N) stack |
+
+**Key idea:** Recurse through the array, appending index to result list whenever `A[i] == B`.
+
+---
+
+#### 6.7 Max of Array Using Recursion
+**File:** `Recursion/Medium/max_of_an_array_using_recursion.dart`
+
+Find the maximum element of an array using recursion.
+
+| Approach                   | Time | Space    |
+|----------------------------|------|----------|
+| Recursive (carry max)      | O(N) | O(N) stack |
+
+**Key idea:** Pass running max through recursion. Compare `A[i]` with current max at each step.
+
+---
+
+#### 6.8 Tower of Hanoi
+**File:** `Recursion/Medium/tower_of_hanoi.dart`
+
+> **Status:** Stub — implementation pending.
 
 ---
 
@@ -710,46 +944,64 @@ import '../../../constants.dart';
 
 ## Problems at a Glance
 
-| #  | Problem                              | Topic        | Difficulty | Optimal TC  | File                                                                         |
-|----|--------------------------------------|--------------|------------|-------------|------------------------------------------------------------------------------|
-| 1  | Generate All Sub-arrays              | Arrays 1D    | VeryEasy   | O(N³)       | `Arrays/problems/1D/VeryEasy/sub_array.dart`                                 |
-| 2  | Check Pair Sum                       | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/check_pair.dart`                                    |
-| 3  | Rotate Array                         | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/rotate_array.dart`                                  |
-| 4  | Minimum Time to Equal Elements       | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/minimum_time.dart`                                  |
-| 5  | Second Largest Element               | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/second_largest_element.dart`                        |
-| 6  | Count Elements < Maximum             | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/number_of_elements_less_than_maximum.dart`          |
-| 7  | Equilibrium Index                    | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/equilibrium_index.dart`                             |
-| 8  | Leader in Array                      | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/leader_in_array.dart`                               |
-| 9  | Best Time to Buy & Sell Stocks       | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/best_time_to_buy_and_sell_stocks.dart`              |
-| 10 | Even Numbers in a Range              | Arrays 1D    | Easy       | O(N+Q)      | `Arrays/problems/1D/Easy/even_numbers_in_range.dart`                         |
-| 11 | Minimum Swaps                        | Arrays 1D    | Easy       | O(N)        | `Arrays/problems/1D/Easy/minimum_swaps.dart`                                 |
-| 12 | Pick From Both Sides                 | Arrays 1D    | Medium     | O(N)        | `Arrays/problems/1D/Medium/pick_from_both_side.dart`                         |
-| 13 | Closest Min & Max                    | Arrays 1D    | Medium     | O(N)        | `Arrays/problems/1D/Medium/closest_min_max.dart`                             |
-| 14 | Special Index                        | Arrays 1D    | Medium     | O(N)        | `Arrays/problems/1D/Medium/special_index.dart`                               |
-| 15 | Maximum Subarray Sum of Fixed Length | Arrays 2D    | VeryEasy   | O(N)        | `Arrays/problems/2D/VeryEasy/maximum_subarray_sum_of_fixed_length.dart`      |
-| 16 | Range Sum Query (Even Indices)       | Arrays 2D    | Easy       | O(N+Q)      | `Arrays/problems/2D/Easy/range_sum.dart`                                     |
-| 17 | Matrix Multiplication                | Arrays 2D    | Easy       | O(N³)       | `Arrays/problems/2D/Easy/matrix_multiplication.dart`                         |
-| 18 | Maximum Sub Array (bounded)          | Arrays 2D    | Easy       | O(N)        | `Arrays/problems/2D/Easy/maximum_sub_array.dart`                             |
-| 19 | Subarray with Given Sum and Length   | Arrays 2D    | Easy       | O(N)        | `Arrays/problems/2D/Easy/sub_array_with_given_sum_and_length.dart`           |
-| 20 | Sum of All Sub-arrays                | Arrays 2D    | Easy       | O(N)        | `Arrays/problems/2D/Easy/sum_of_all_sub_array.dart`                          |
-| 21 | Anti Diagonals                       | Arrays 2D    | Easy       | O(N²)       | `Arrays/problems/2D/Easy/anti_diagonals.dart`                                |
-| 22 | Counting Subarrays (sum < B)         | Arrays 2D    | Medium     | O(N)        | `Arrays/problems/2D/Medium/counting_subarrays_easy.dart`                     |
-| 23 | Good Subarrays                       | Arrays 2D    | Medium     | O(N²)       | `Arrays/problems/2D/Medium/good_subarrays_easy.dart`                         |
-| 24 | Subarray with Least Average          | Arrays 2D    | Medium     | O(N)        | `Arrays/problems/2D/Medium/subarray_with_least_average.dart`                 |
-| 25 | Count "AG" Pairs                     | Strings      | Easy       | O(N)        | `String/problems/Easy/pair_count.dart`                                       |
-| 26 | Arithmetic Progression               | Sorting      | VeryEasy   | O(N)        | `Sorting/problems/VeryEasy/arithmetic_progression.dart`                      |
-| 27 | Bubble Sort                          | Sorting      | Easy       | O(N²)       | `Sorting/problems/Easy/bubble_sort.dart`                                     |
-| 28 | Elements Removal                     | Sorting      | Easy       | O(N log N)  | `Sorting/problems/Easy/elements_removal.dart`                                |
-| 29 | Kth Smallest Element                 | Sorting      | Easy       | O(N) avg    | `Sorting/problems/Easy/kth_smallest_element.dart`                            |
-| 30 | Noble Integer                        | Sorting      | Easy       | O(N log N)  | `Sorting/problems/Easy/noble_integer.dart`                                   |
-| 31 | Factors Sort                         | Sorting      | Easy       | O(N·√M·lgN) | `Sorting/problems/QuickSort/Easy/factors_sort.dart`                          |
-| 32 | Largest Number                       | Sorting      | Easy       | O(N log N)  | `Sorting/problems/QuickSort/Easy/largest_number.dart`                        |
-| 33 | Tens Digit Sorting                   | Sorting      | Easy       | O(N log N)  | `Sorting/problems/QuickSort/Easy/tens_digit_sorting.dart`                    |
-| 34 | Wave Array                           | Sorting      | Easy       | O(N log N)  | `Sorting/problems/QuickSort/Easy/wave_array.dart`                            |
-| 35 | B Closest Points to Origin           | Sorting      | Medium     | —           | `Sorting/problems/QuickSort/Medium/b_closest_points_to_origin.dart`          |
-| 36 | Maximum Height of Staircase          | Searching    | Easy       | O(log A)    | `Searching/BinarySearch/problems/Easy/maximum_height_of_staircase.dart`      |
-| 37 | Sorted Insert Position               | Searching    | Easy       | O(log N)    | `Searching/BinarySearch/problems/Easy/sorted_insert_position.dart`           |
-| 38 | Square Root of Integer               | Searching    | Easy       | O(log A)    | `Searching/BinarySearch/problems/Easy/square_root_of_integer.dart`           |
-| 39 | Find Peak Element                    | Searching    | Medium     | O(log N)    | `Searching/BinarySearch/problems/Medium/find_peak_element.dart`              |
-| 40 | Matrix Search                        | Searching    | Medium     | O(log N+M)  | `Searching/BinarySearch/problems/Medium/matrix_search.dart`                  |
-| 41 | Search for Range                     | Searching    | Medium     | O(log N)    | `Searching/BinarySearch/problems/Medium/search_for_range.dart`               |
+| #  | Problem                              | Topic        | Difficulty | Optimal TC       | File                                                                         |
+|----|--------------------------------------|--------------|------------|------------------|------------------------------------------------------------------------------|
+| 1  | Generate All Sub-arrays              | Arrays 1D    | VeryEasy   | O(N³)            | `Arrays/1D/VeryEasy/sub_array.dart`                                          |
+| 2  | Check Pair Sum                       | Arrays 1D    | Easy       | O(N)             | `Arrays/1D/Easy/check_pair.dart`                                             |
+| 3  | Rotate Array                         | Arrays 1D    | Easy       | O(N)             | `Arrays/1D/Easy/rotate_array.dart`                                           |
+| 4  | Minimum Time to Equal Elements       | Arrays 1D    | Easy       | O(N)             | `Arrays/1D/Easy/minimum_time.dart`                                           |
+| 5  | Second Largest Element               | Arrays 1D    | Easy       | O(N)             | `Arrays/1D/Easy/second_largest_element.dart`                                 |
+| 6  | Count Elements < Maximum             | Arrays 1D    | Easy       | O(N)             | `Arrays/1D/Easy/number_of_elements_less_than_maximum.dart`                   |
+| 7  | Equilibrium Index                    | Arrays 1D    | Easy       | O(N)             | `Arrays/1D/Easy/equilibrium_index.dart`                                      |
+| 8  | Leader in Array                      | Arrays 1D    | Easy       | O(N)             | `Arrays/1D/Easy/leader_in_array.dart`                                        |
+| 9  | Best Time to Buy & Sell Stocks       | Arrays 1D    | Easy       | O(N)             | `Arrays/1D/Easy/best_time_to_buy_and_sell_stocks.dart`                       |
+| 10 | Even Numbers in a Range              | Arrays 1D    | Easy       | O(N+Q)           | `Arrays/1D/Easy/even_numbers_in_range.dart`                                  |
+| 11 | Minimum Swaps                        | Arrays 1D    | Easy       | O(N)             | `Arrays/1D/Easy/minimum_swaps.dart`                                          |
+| 12 | Pick From Both Sides                 | Arrays 1D    | Medium     | O(N)             | `Arrays/1D/Medium/pick_from_both_side.dart`                                  |
+| 13 | Closest Min & Max                    | Arrays 1D    | Medium     | O(N)             | `Arrays/1D/Medium/closest_min_max.dart`                                      |
+| 14 | Special Index                        | Arrays 1D    | Medium     | O(N)             | `Arrays/1D/Medium/special_index.dart`                                        |
+| 15 | Maximum Subarray Sum of Fixed Length | Arrays 2D    | VeryEasy   | O(N)             | `Arrays/2D/VeryEasy/maximum_subarray_sum_of_fixed_length.dart`               |
+| 16 | Range Sum Query (Even Indices)       | Arrays 2D    | Easy       | O(N+Q)           | `Arrays/2D/Easy/range_sum.dart`                                              |
+| 17 | Matrix Multiplication                | Arrays 2D    | Easy       | O(N³)            | `Arrays/2D/Easy/matrix_multiplication.dart`                                  |
+| 18 | Maximum Sub Array (bounded)          | Arrays 2D    | Easy       | O(N)             | `Arrays/2D/Easy/maximum_sub_array.dart`                                      |
+| 19 | Subarray with Given Sum and Length   | Arrays 2D    | Easy       | O(N)             | `Arrays/2D/Easy/sub_array_with_given_sum_and_length.dart`                    |
+| 20 | Sum of All Sub-arrays                | Arrays 2D    | Easy       | O(N)             | `Arrays/2D/Easy/sum_of_all_sub_array.dart`                                   |
+| 21 | Anti Diagonals                       | Arrays 2D    | Easy       | O(N²)            | `Arrays/2D/Easy/anti_diagonals.dart`                                         |
+| 22 | Counting Subarrays (sum < B)         | Arrays 2D    | Medium     | O(N)             | `Arrays/2D/Medium/counting_subarrays_easy.dart`                              |
+| 23 | Good Subarrays                       | Arrays 2D    | Medium     | O(N²)            | `Arrays/2D/Medium/good_subarrays_easy.dart`                                  |
+| 24 | Subarray with Least Average          | Arrays 2D    | Medium     | O(N)             | `Arrays/2D/Medium/subarray_with_least_average.dart`                          |
+| 25 | Count "AG" Pairs                     | Strings      | Easy       | O(N)             | `String/Easy/pair_count.dart`                                                |
+| 26 | Arithmetic Progression               | Sorting      | VeryEasy   | O(N)             | `Sorting/BubbleSort/VeryEasy/arithmetic_progression.dart`                    |
+| 27 | Bubble Sort                          | Sorting      | Easy       | O(N²)            | `Sorting/BubbleSort/Easy/bubble_sort.dart`                                   |
+| 28 | Elements Removal                     | Sorting      | Easy       | O(N log N)       | `Sorting/BubbleSort/Easy/elements_removal.dart`                              |
+| 29 | Kth Smallest Element                 | Sorting      | Easy       | O(N) avg         | `Sorting/BubbleSort/Easy/kth_smallest_element.dart`                          |
+| 30 | Noble Integer                        | Sorting      | Easy       | O(N log N)       | `Sorting/BubbleSort/Easy/noble_integer.dart`                                 |
+| 31 | Factors Sort                         | Sorting      | Easy       | O(N·√M·lgN)      | `Sorting/QuickSort/Easy/factors_sort.dart`                                   |
+| 32 | Largest Number                       | Sorting      | Easy       | O(N log N)       | `Sorting/QuickSort/Easy/largest_number.dart`                                 |
+| 33 | Tens Digit Sorting                   | Sorting      | Easy       | O(N log N)       | `Sorting/QuickSort/Easy/tens_digit_sorting.dart`                             |
+| 34 | Wave Array                           | Sorting      | Easy       | O(N log N)       | `Sorting/QuickSort/Easy/wave_array.dart`                                     |
+| 35 | B Closest Points to Origin           | Sorting      | Medium     | —                | `Sorting/QuickSort/Medium/b_closest_points_to_origin.dart`                   |
+| 36 | Maximum Height of Staircase          | Searching    | Easy       | O(log A)         | `Searching/BinarySearch/Easy/maximum_height_of_staircase.dart`               |
+| 37 | Sorted Insert Position               | Searching    | Easy       | O(log N)         | `Searching/BinarySearch/Easy/sorted_insert_position.dart`                    |
+| 38 | Square Root of Integer               | Searching    | Easy       | O(log A)         | `Searching/BinarySearch/Easy/square_root_of_integer.dart`                    |
+| 39 | Single Element in Sorted Array       | Searching    | Easy       | O(log N)         | `Searching/BinarySearch/Easy/single_element_in_sorted_array.dart`            |
+| 40 | Find Peak Element                    | Searching    | Medium     | O(log N)         | `Searching/BinarySearch/Medium/find_peak_element.dart`                       |
+| 41 | Matrix Search                        | Searching    | Medium     | O(log N+M)       | `Searching/BinarySearch/Medium/matrix_search.dart`                           |
+| 42 | Search for Range                     | Searching    | Medium     | O(log N)         | `Searching/BinarySearch/Medium/search_for_range.dart`                        |
+| 43 | Rotated Sorted Array Search          | Searching    | Medium     | O(log N)         | `Searching/BinarySearch/Medium/rotated_sorted_array_search.dart`             |
+| 44 | Aggressive Cows                      | Searching    | Medium     | O(N log(range))  | `Searching/BinarySearch/Medium/aggressive_cow.dart`                          |
+| 45 | Painter's Partition Problem          | Searching    | Medium     | O(N log(sum))    | `Searching/BinarySearch/Medium/painters_partition_problem.dart`              |
+| 46 | Matrix Median                        | Searching    | Medium     | —                | `Searching/BinarySearch/Medium/matrix_median.dart`                           |
+| 47 | Median of Two Sorted Arrays          | Searching    | Medium     | O(log(min(N,M))) | `Searching/BinarySearch/Medium/median_of_two_sorted_arrays.dart`             |
+| 48 | Minimum Difference                   | Searching    | Medium     | —                | `Searching/BinarySearch/Medium/minimum_difference.dart`                      |
+| 49 | Add or Not                           | Searching    | Medium     | —                | `Searching/BinarySearch/Medium/add_or_not.dart`                              |
+| 50 | Allocate Books                       | Searching    | Medium     | —                | `Searching/BinarySearch/Medium/allocate_books.dart`                          |
+| 51 | Special Integer                      | Searching    | Medium     | —                | `Searching/BinarySearch/Medium/special_integer.dart`                         |
+| 52 | Check Palindrome                     | Recursion    | Easy       | O(N)             | `Recursion/Easy/check_palindrome.dart`                                       |
+| 53 | Decreasing then Increasing           | Recursion    | Easy       | O(N)             | `Recursion/Easy/decreasing_increasing_in_one_Function.dart`                  |
+| 54 | Print Array Using Recursion          | Recursion    | Medium     | O(N)             | `Recursion/Medium/print_array_using_recursion.dart`                          |
+| 55 | First Index Using Recursion          | Recursion    | Medium     | O(N)             | `Recursion/Medium/first_index_using_recursion.dart`                          |
+| 56 | Last Index Using Recursion           | Recursion    | Medium     | O(N)             | `Recursion/Medium/last_index_using_recursion.dart`                           |
+| 57 | All Indices of Array                 | Recursion    | Medium     | O(N)             | `Recursion/Medium/all_indices_of_array.dart`                                 |
+| 58 | Max of Array Using Recursion         | Recursion    | Medium     | O(N)             | `Recursion/Medium/max_of_an_array_using_recursion.dart`                      |
+| 59 | Tower of Hanoi                       | Recursion    | Medium     | O(2^N)           | `Recursion/Medium/tower_of_hanoi.dart`                                       |
